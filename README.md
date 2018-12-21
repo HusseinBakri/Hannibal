@@ -3,5 +3,8 @@ Hannibal is an adaptive engine for 3D Web digital heritage artefacts in Web-Base
 
 Hannibal is presented in repository in a way that allows you to use it in your virtual museum. You can also alter it to be used in any adaptive application that requires doing an action based on a set of decisions.
 
+The adaptive engine is named after _Hannibal Barca_, the hero of the Phoenician Carthaginians who was himself
+adaptive and cunning in his war tactics against the Romans during the Punic wars.
+
 ## Requirements
 
