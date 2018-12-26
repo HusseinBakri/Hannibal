@@ -27,7 +27,6 @@ sudo apt-get install php
 You should have MySQL on your server if not, install the following:
 ```
 #For MySQL server
-sudo  apt-get install php5-mysql		#for php5 (but who uses it anymore 
 sudo apt-get install php7.0-mysql		#for php7
 sudo apt-get install mysql-server mysql-client
 
@@ -45,12 +44,12 @@ sudo apt-get install python-virtualenv
 
 Since our WBVM is talking to Omeka so we are using the Omeka Client Python: [omeka-client-py](https://github.com/jimsafley/omeka-client-py) by Jim Safley. The needed Python modules are markdown, httplib2, pyyaml, and urllib3. 
 
-So you have to make sure Apache can have access to all Python modules required in this library. As an easy and headache free technique is to install the Python modules as I have mention in a Python Virtual Enviornment inside your Apache /var/www/html/SOMETHING. So navigate to such directory.
+So you have to make sure Apache can have access to all Python modules required in this library. As an easy and headache-free technique is to install the Python modules as I have mention in a Python Virtual Enviornment inside your Apache /var/www/html/SOMETHING. So navigate to such directory.
 
 ```
 virtualenv env
 
-#This will install a small python environment inside the map folder with pip and other essential modules.
+#This will install a small python environment inside the folder with pip and other essential modules.
 #To check the pip version of the virtual environment
 env/bin/pip --version
 
@@ -82,7 +81,7 @@ sudo apt-get install phpmyadmin
 ```
 This will start installing the packages. You will be asked which Web Server is to be used. Choose apache2 and follow along. 
 
-Now  for the Nginx server and the folks who are in love with it, Hannibal itself without its backend (Decimated models are stored in Omeka) works gracefully with this web server but not Omeka (the backend). As you know probably, Omeka needs the Apache Rewrite rules to work and access .htaccess files. I tried to create a solution for nginx following material online but to no avail.
+Now  for the Nginx server and the folks who are in love with it, Hannibal itself without its backend (backend of decimated models) works gracefully with this web server but not Omeka (the backend of Hannibal and WBVM). Omeka needs the Apache Rewrite rules to work and access .htaccess files. I tried to create a solution for nginx following material online but to no avail.
 
 For Omeka to work gracefully with Apache Web Server you need to enable mod_rewrite in Apache.
 ```
@@ -117,13 +116,12 @@ sudo service apache2 restart
 ```
 
 ##Omeka Important things to change
-Inside php.ini in apache2 the default upload size is 2MB. Obviously this does not help so we need to put it as high as possible especially 3D models have bigger sizes. Assuming we are using php7
+Inside php.ini in apache2 the default upload size is 2MB. Obviously this does not help so we need to put it as high as possible especially 3D models have large sizes on disk. Assuming we are using php7
 ```
 sudo nano /etc/php/7.0/apache2/php.ini
-#or
-sudo gedit /etc/php/7.0/apache2/php.ini
+
 ```
-The default lines that control the file size upload are normally 2M, Change these default values to your desired maximum file upload size. For example, if you needed to upload a 30MB file you would changes these lines to:
+The default lines that control the file size upload are normally 2M, Change these default values to your desired maximum file upload size. It is good to put a high number such as 1024MB.
 ```
 #php.ini Options (setting used by Omeka EULAC)
 post_max_size = 1024M
@@ -142,7 +140,7 @@ When you have the php.ini file configured for your needs, save the changes, and 
 sudo service apache2 restart
 ```
 
-When POSTing files to omeka (meaning using REST API via Python), you need also to install ImageMagick
+When POSTing files to omeka (meaning using REST API via Python), you need also to install ImageMagick. Omeka uses ImageMagick.
 
 To check if ImageMagick is present, check that the following gives an output.
 ```
@@ -165,5 +163,3 @@ Now verify by:
 php -m | grep imagick
 ```
 You should get the word ‘imagick’.
-
-The WBVM that my group built has its Wiki system in [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki). I will omit how to install and cofigure it here.
