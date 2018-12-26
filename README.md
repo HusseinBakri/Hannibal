@@ -10,7 +10,7 @@ Hannibal is integrated in a small subset clone of a WBVM (for the Shetland musue
 
 
 ## Notez Bien
-Due to copyrighted material the Web-Based Virtual Museum clone subset pertaining to [EULAC](https://eu-lac.org/map/?page=europe) will not be uploaded. I do not have permission of showing digitised material pertaining to the musuem. IN addition the aim of this repository is the expert engine and the adaptive engine (precisely detection component of network conditions and WebGL Benchmark).
+Due to copyrighted material the Web-Based Virtual Museum clone subset pertaining to [EULAC](https://eu-lac.org/map/?page=europe) will not be uploaded. I do not have permission of showing digitised material pertaining to the musuem. In addition the aim of this repository is the expert engine and the adaptive engine (precisely detection component of network conditions and WebGL Benchmark).
 
 ## Requirements
 The following are configuration done on a Ubuntu Server 16.04.X
@@ -70,3 +70,50 @@ env/bin/pip install urllib3
 
 ```
 I had some problems installing the EULAC WBVM containing Hannibal on many Linux servers and this was due to problems in permissions so make sure you have these set correctly.
+
+Since both Hannibal and the WBVM talks to MySQL DBMS so make you sure you configure these folks correctly.
+```
+#Setting up MySQL users and root user
+
+sudo mysql -uroot –p
+#This should ask you for the password you entered before during the installation, enter it. Write this down (important).
+#THEN (IMPORTANT) install phpmyadmin
+
+sudo apt-get install phpmyadmin
+
+#This will start installing the packages. You will be asked which Web Server is to be used. Choose apache2 
+```
+
+Now  for the Nginx server and the folks who are in love with it, Hannibal itself without its backend (Decimated models are stored in Omeka) works gracefully with this web server but not Omeka (the backend). As you know probably, Omeka needs the Apache Rewrite rules to work and access .htaccess files. I tried to create a solution for nginx following material online but to no avail.
+
+For Omeka to work gracefully with Apache Web Server you need to enable mod_rewrite in Apache.
+```
+sudo a2enmod rewrite
+#Restart apache2 after that for things to take effect
+sudo systemctl restart apache2    
+
+```
+
+You need also to change /etc/apache2/apache2.conf for effective rewrite. So have something similar to the following:
+
+```
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+</Directory>
+```
+
+and change it to
+```
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+</Directory>
+```
+then  restart Apache
+
+```
+sudo service apache2 restart
+```
