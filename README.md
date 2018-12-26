@@ -19,13 +19,9 @@ The following are configurations done on a Ubuntu Server 16.04.X
 I would assume you have Apache Web server. If not install the following packages:
 ```
 sudo apt-get install apache2 apache2-doc apache2-utils
-sudo apt-get install libapache2-mod-php5 php5 php-pear php5-xcache
 
 #Install php7 (PS: it will install php7 now not php5 by default)
 sudo apt-get install php
-
-#or install explicitly PHP7
-sudo apt-get install php7.0
 
 ```
 You should have MySQL on your server if not, install the following:
