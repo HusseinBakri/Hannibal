@@ -1,19 +1,21 @@
 # Hannibal
-Hannibal is an PHP7 adaptive engine for 3D Web digital heritage artefacts in Web-Based Virtual Museums (WBVMs). It uses a forward chaining expert system hooked to a <a href="https://www.mysql.com/" target="_blank">MySQL</a> Database Management System (DBMS). Hannibal is a middleware that works with [Omeka](https://omeka.org/ "Omeka DAMS") Digital Asset Management System (DAMS) as a backend and with a <a href="https://leafletjs.com/" target="_blank">leaflet JS</a> map-based Web-Based Virtual Museum on the front end. 
+Hannibal is a PHP7 adaptive engine for 3D Web digital heritage artefacts in Web-Based Virtual Museums (WBVMs). It uses also Python to execute a lot of needed processes such as for decimating 3D models, and for communicating with a backend (Omeka DAMS). It uses a forward chaining expert system hooked to a <a href="https://www.mysql.com/" target="_blank">MySQL</a> Database Management System (DBMS). Hannibal is a middleware that works with [Omeka](https://omeka.org/ "Omeka DAMS") Digital Asset Management System (DAMS) as a backend and with a <a href="https://leafletjs.com/" target="_blank">leaflet JS</a> map-based Web-Based Virtual Museum on the front end. 
 
-Hannibal is presented in repository in a way that allows you to use it in your virtual museum. You can also alter it to be used in any adaptive application that requires doing an action based on a set of decisions.
+Hannibal is presented in repository in a way that allows you to use it in your virtual museum and with your backend. You can also alter it to be used in any adaptive application that requires doing an action based on a set of decisions. Hannibal has a component that decimate an uploaded 3D model into lower fixed resolutions and create a 360 image sprite of the model. But this component is shared in the form of seperate repositories in [BlenderPythonDecimator](https://github.com/HusseinBakri/BlenderPythonDecimator) and [3DMeshBulkSimplification](https://github.com/HusseinBakri/3DMeshBulkSimplification), [TransformMeshToGIFSprite] (https://github.com/HusseinBakri/TransformMeshToGIFSprite).
 
 The adaptive engine is named after _Hannibal Barca_, the hero of the Phoenician Carthaginians who was himself
 adaptive and cunning in his war tactics against the Romans during the Punic wars.
 
-Hannibal is integrated in a small subset clone of a WBVM (for the Shetland musuem (Scotland)) built for the [EULAC](https://eu-lac.org/map/?page=europe) Web-Based Virtual Museum initiative, a complete web-based virtual museum infrastructure developed by researchers in the Open Virtual World research group at the University of St Andrews, that aims to replicate all the functions of traditional museums on the web providing curators a management interface where they can upload digitised 3D models and other media and their metadata, in addition to providing documentation in the form of wiki articles.
+Hannibal was integrated and tested in a small subset clone of a WBVM (for the Shetland musuem (Scotland)) built for the [EULAC](https://eu-lac.org/map/?page=europe) Web-Based Virtual Museum initiative, a complete web-based virtual museum infrastructure developed by researchers in the Open Virtual World research group at the University of St Andrews, that aims to replicate all the functions of traditional museums on the web providing curators a management interface where they can upload digitised 3D models and other media and their metadata, in addition to providing documentation in the form of wiki articles.
 
 
 ## Notez Bien
-Due to copyrighted material the Web-Based Virtual Museum clone subset pertaining to [EULAC](https://eu-lac.org/map/?page=europe) will not be uploaded. I do not have permission of showing digitised material pertaining to the musuem. In addition the aim of this repository is the expert engine and the adaptive engine (precisely detection component of network conditions and WebGL Benchmark).
+Due to copyrighted material the Web-Based Virtual Museum clone subset pertaining to [EULAC](https://eu-lac.org/map/?page=europe) will not be uploaded. I do not have permission of showing digitised material pertaining to the musuem. In addition the aim of this repository is to show the expert system and adaptive engine (precisely detection component of network conditions and WebGL Benchmark).
 
 ## Requirements
-The following are configuration done on a Ubuntu Server 16.04.X
+You need Linux OS (probably you can make things work in other OSs)
+
+The following are configurations done on a Ubuntu Server 16.04.X
 I would assume you have Apache Web server. If not install the following packages:
 ```
 sudo apt-get install apache2 apache2-doc apache2-utils
