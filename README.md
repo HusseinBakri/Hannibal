@@ -115,7 +115,7 @@ then  restart Apache
 sudo service apache2 restart
 ```
 
-##Omeka Important things to change
+## Omeka Important things
 Inside php.ini in apache2 the default upload size is 2MB. Obviously this does not help so we need to put it as high as possible especially 3D models have large sizes on disk. Assuming we are using php7
 ```
 sudo nano /etc/php/7.0/apache2/php.ini
