@@ -33,7 +33,7 @@ sudo  apt-get install php5-mysql		#for php5 (but who uses it anymore 
 sudo apt-get install php7.0-mysql		#for php7
 sudo apt-get install mysql-server mysql-client
 
-Other Necessary Packages
+#Other Necessary Packages
 sudo apt-get install build-essential
 sudo apt-get install libncurses5-dev libncursesw5-dev libreadline6-dev 
 sudo apt-get install libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev
@@ -81,8 +81,8 @@ sudo mysql -uroot –p
 
 sudo apt-get install phpmyadmin
 
-#This will start installing the packages. You will be asked which Web Server is to be used. Choose apache2 
 ```
+This will start installing the packages. You will be asked which Web Server is to be used. Choose apache2 and follow along. 
 
 Now  for the Nginx server and the folks who are in love with it, Hannibal itself without its backend (Decimated models are stored in Omeka) works gracefully with this web server but not Omeka (the backend). As you know probably, Omeka needs the Apache Rewrite rules to work and access .htaccess files. I tried to create a solution for nginx following material online but to no avail.
 
@@ -117,3 +117,55 @@ then  restart Apache
 ```
 sudo service apache2 restart
 ```
+
+##Omeka Important things to change
+Inside php.ini in apache2 the default upload size is 2MB. Obviously this does not help so we need to put it as high as possible especially 3D models have bigger sizes. Assuming we are using php7
+```
+sudo nano /etc/php/7.0/apache2/php.ini
+#or
+sudo gedit /etc/php/7.0/apache2/php.ini
+```
+The default lines that control the file size upload are normally 2M, Change these default values to your desired maximum file upload size. For example, if you needed to upload a 30MB file you would changes these lines to:
+```
+#php.ini Options (setting used by Omeka EULAC)
+post_max_size = 1024M
+upload_max_filesize = 1024M
+```
+Other common resource settings include the amount of memory PHP can use as set by memory_limit:
+```
+memory_limit = 128M
+```
+or max_execution_time, which defines how many seconds a PHP process can run for:
+```
+max_execution_time = 30
+```
+When you have the php.ini file configured for your needs, save the changes, and exit the text editor. Restart the web server to enable the changes. For Apache on Ubuntu server 16.04, this command will restart the web server:
+```
+sudo service apache2 restart
+```
+
+When POSTing files to omeka (meaning using REST API via Python), you need also to install ImageMagick
+
+To check if ImageMagick is present, check that the following gives an output.
+```
+convert –version
+```
+If not you need to install additional packages before it. Check that gcc package is installed, then install ImageMagick itself:
+```
+sudo apt-get install imagemagick
+```
+Then install all php extensions of ImageMagick:
+```
+sudo apt-get install php-imagick		#This will install extensions for PHP7 by default
+```
+Restart Apache and Verify
+```
+sudo service apache2 restart
+```
+Now verify by:
+```
+php -m | grep imagick
+```
+You should get the word ‘imagick’.
+
+The WBVM that my group built has its Wiki system in [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki). I will omit how to install and cofigure it here.
