@@ -163,3 +163,6 @@ Now verify by:
 php -m | grep imagick
 ```
 You should get the word ‘imagick’.
+
+# License
+This program is licensed under MIT License - you are free to distribute, change, enhance and include any of the code of this application in your tools. I only expect adequate attribution and citation of this work. The attribution should include the title of the program, the author (me) and the site or the document where the program is taken from.
